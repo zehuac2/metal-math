@@ -1,7 +1,7 @@
 import XCTest
 @testable import MetalMath
 
-final class Float32DegreeTests: XCTestCase {
+final class FloatingPointDegreeTests: XCTestCase {
   func testRadian() {
     XCTAssertEqual(0.0.radian, 0.0, accuracy: 0.001)
     XCTAssertEqual(45.0.radian, 0.7854, accuracy: 0.001)
