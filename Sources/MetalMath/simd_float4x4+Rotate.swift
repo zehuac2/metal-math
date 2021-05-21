@@ -8,6 +8,9 @@
 import simd
 
 public extension simd_float4x4 {
+  /// Create a rotation matrix around Y axis
+  /// - Parameter rotation: rotation around y in radians
+  /// - Returns: a rotation matrix
   @inlinable
   static func rotateY(_ rotation: Float32) -> Self {
     return simd_float4x4(rows: [
