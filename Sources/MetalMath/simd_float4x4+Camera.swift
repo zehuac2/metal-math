@@ -40,7 +40,7 @@ extension simd_float4x4 {
     let height = tan(fovY * 0.5)
     let yScale = 1 / height
 
-    let width = aspect / height
+    let width = aspect * height
     let xScale = 1 / width
 
     return .perspective(
