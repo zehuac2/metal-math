@@ -5,12 +5,12 @@
 //  Created by Zehua Chen on 12/31/20.
 //
 
-public extension FloatingPoint {
+extension FloatingPoint {
   /// Convert the number from degree to radian
   ///
   /// `self * .pi / 180`
   @inlinable
-  var radian: Self {
+  public var radian: Self {
     return self * .pi / 180
   }
 
@@ -18,7 +18,7 @@ public extension FloatingPoint {
   ///
   /// `self * 180 / .pi`
   @inlinable
-  var degree: Self {
+  public var degree: Self {
     return self * 180 / .pi
   }
 }

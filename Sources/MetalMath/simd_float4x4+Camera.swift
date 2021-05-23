@@ -7,43 +7,69 @@
 
 import simd
 
-public extension simd_float4x4 {
+extension simd_float4x4 {
   @inlinable
-  static func look(at target: SIMD3<Float32>, from eye: SIMD3<Float32>, up: SIMD3<Float32>) -> Self {
-    let v = normalize(target - eye)
-    let n = normalize(cross(v, up))
-    let u = normalize(cross(n, v))
+  public static func look(at target: SIMD3<Float32>, from eye: SIMD3<Float32>, up: SIMD3<Float32>)
+    -> Self
+  {
+    let zaxis = normalize(target - eye)
+    let xaxis = normalize(cross(up, zaxis))
+    let yaxis = cross(zaxis, xaxis)
 
-    return simd_float4x4(rows: [
-      SIMD4<Float32>([n.x, n.y, n.z, -dot(n, eye)]),
-      SIMD4<Float32>([u.x, u.y, u.z, -dot(u, eye)]),
-      SIMD4<Float32>([v.x, v.y, v.z, -dot(v, eye)]),
-      SIMD4<Float32>([0, 0, 0, 1]),
-    ])
+    return simd_transpose(
+      simd_float4x4(
+        columns: (
+          [xaxis.x, yaxis.x, zaxis.x, 0],
+          [xaxis.y, yaxis.y, zaxis.y, 0],
+          [xaxis.z, yaxis.z, zaxis.z, 0],
+          [-dot(xaxis, eye), -dot(yaxis, eye), -dot(zaxis, eye), 1]
+        )))
   }
 
   /// Create a perspective projection matrix
-  ///
-  /// Originally from [Metal by Examples](https://github.com/metal-by-example/sample-code/blob/a73cc91cf8e4dcae452e732d4c7800eb4ac2d44d/objc/04-DrawingIn3D/DrawingIn3D/MBEMathUtilities.m#L58-L73)
   /// - Parameters:
-  ///   - fovY: field of view in radians
-  ///   - aspect: aspect ratio between the X and the Y axis
+  ///   - fovY: vertical field of view in radians
+  ///   - aspect: aspect ratio between the X and Y axis, i.e. `width / height`
   ///   - nearZ: near Z plane
   ///   - farZ: far Z plane
   /// - Returns: a projection matrix
   @inlinable
-  static func perspective(fovY: Float32, aspect: Float32, nearZ: Float32, farZ: Float32) -> Self {
-    let yScale = 1 / tan(fovY * 0.5)
-    let xScale = yScale / aspect
-    let zRange = farZ - nearZ
-    let zScale = -(farZ + nearZ) / zRange
-    let wzScale = -2 * farZ * nearZ / zRange
+  public static func perspective(fovY: Float32, aspect: Float32, nearZ: Float32, farZ: Float32)
+    -> Self
+  {
+    let height = tan(fovY * 0.5)
+    let yScale = 1 / height
 
-    return simd_float4x4(columns: (
-      [xScale, 0, 0, 0],
-      [0, yScale, 0, 0],
-      [0, 0, zScale, -1],
-      [0, 0, wzScale, 0]
-    ))
+    let width = aspect / height
+    let xScale = 1 / width
+
+    return .perspective(
+      right: xScale / 2,
+      left: -(xScale / 2),
+      top: yScale / 2,
+      bottom: -(yScale / 2),
+      nearZ: nearZ,
+      farZ: farZ)
+  }
+
+  /// Create a perspective projection matrix
+  /// - Parameters:
+  ///   - right: maximum x-value of the view volume
+  ///   - left: minimum x-value of the view volume
+  ///   - top: maximum y-value of the view volume
+  ///   - bottom: minimum y-value of the view volume
+  ///   - nearZ: minimum z-value of the view volume
+  ///   - farZ: maximum z-value of the view volume
+  /// - Returns: a projection matrix
+  @inlinable
+  public static func perspective(
+    right: Float32, left: Float32, top: Float32, bottom: Float32, nearZ: Float32, farZ: Float32
+  ) -> Self {
+    return simd_float4x4(rows: [
+      [2 * nearZ / (right - left), 0, -(right + left) / (right - left), 0],
+      [0, 2 * nearZ / (top - bottom), -(top + bottom) / (top - bottom), 0],
+      [0, 0, farZ / (farZ - nearZ), -farZ * nearZ / (farZ - nearZ)],
+      [0, 0, 1, 0],
+    ])
   }
 }
