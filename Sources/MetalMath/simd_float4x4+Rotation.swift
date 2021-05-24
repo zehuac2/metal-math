@@ -20,4 +20,9 @@ extension simd_float4x4 {
       SIMD4<Float32>([0, 0, 0, 1]),
     ])
   }
+
+  @inlinable
+  public static func rotateY(_ rotation: Float32, around center: SIMD3<Float32>) -> Self {
+    return .translate(center) * .rotateY(rotation) * .translate(-center)
+  }
 }

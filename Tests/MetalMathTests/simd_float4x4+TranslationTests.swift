@@ -1,12 +1,13 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by Zehua Chen on 5/21/21.
 //
 
 import XCTest
 import simd
+
 @testable import MetalMath
 
 class Float4x4TranslationTests: XCTestCase {
@@ -42,4 +43,3 @@ class Float4x4TranslationTests: XCTestCase {
     XCTAssertEqual(result, [1, 1, 0])
   }
 }
-

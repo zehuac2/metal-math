@@ -1,4 +1,5 @@
 import XCTest
+
 @testable import MetalMath
 
 final class FloatingPointDegreeTests: XCTestCase {

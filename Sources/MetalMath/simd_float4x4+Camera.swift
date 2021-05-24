@@ -16,14 +16,13 @@ extension simd_float4x4 {
     let xaxis = normalize(cross(up, zaxis))
     let yaxis = cross(zaxis, xaxis)
 
-    return simd_transpose(
-      simd_float4x4(
-        columns: (
-          [xaxis.x, yaxis.x, zaxis.x, 0],
-          [xaxis.y, yaxis.y, zaxis.y, 0],
-          [xaxis.z, yaxis.z, zaxis.z, 0],
-          [-dot(xaxis, eye), -dot(yaxis, eye), -dot(zaxis, eye), 1]
-        )))
+    return simd_float4x4(
+      columns: (
+        [xaxis.x, yaxis.x, zaxis.x, 0],
+        [xaxis.y, yaxis.y, zaxis.y, 0],
+        [xaxis.z, yaxis.z, zaxis.z, 0],
+        [-dot(xaxis, eye), -dot(yaxis, eye), -dot(zaxis, eye), 1]
+      ))
   }
 
   /// Create a perspective projection matrix
