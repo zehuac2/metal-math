@@ -22,16 +22,16 @@ class Float4x4CameraTests: XCTestCase {
   func testViewFromFront() {
     let position = SIMD4<Float32>([0, 0, 0, 1])
     let lookat = simd_float4x4.look(at: [0, 0, 0], from: [0, 0, 1], up: [0, 1, 0])
-    let result = SIMD3<Float32>(lookat * position)
+    let result = lookat * position
 
-    XCTAssertEqual(result, [0, 0, 1])
+    XCTAssertEqual(result, [0, 0, 1, 1])
   }
 
   func testViewFromRight() {
     let position = SIMD4<Float32>([0, 0, 0, 1])
     let lookat = simd_float4x4.look(at: [0, 0, 0], from: [1, 0, 0], up: [0, 1, 0])
-    let result = SIMD3<Float32>(lookat * position)
+    let result = lookat * position
 
-    XCTAssertEqual(result, [0, 0, 1])
+    XCTAssertEqual(result, [0, 0, 1, 1])
   }
 }
