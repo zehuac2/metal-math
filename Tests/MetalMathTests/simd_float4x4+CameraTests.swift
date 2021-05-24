@@ -5,10 +5,9 @@
 //  Created by Zehua Chen on 5/21/21.
 //
 
+import MetalMath
 import XCTest
 import simd
-
-@testable import MetalMath
 
 class Float4x4CameraTests: XCTestCase {
   func testViewFromBehind() {
