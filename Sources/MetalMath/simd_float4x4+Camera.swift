@@ -7,7 +7,7 @@
 
 import simd
 
-extension simd_float4x4 {
+extension Float4x4 {
   @inlinable
   public static func look(at target: SIMD3<Float32>, from eye: SIMD3<Float32>, up: SIMD3<Float32>)
     -> Self
@@ -16,7 +16,7 @@ extension simd_float4x4 {
     let xaxis = normalize(cross(up, zaxis))
     let yaxis = cross(zaxis, xaxis)
 
-    return simd_float4x4(
+    return Float4x4(
       columns: (
         [xaxis.x, yaxis.x, zaxis.x, 0],
         [xaxis.y, yaxis.y, zaxis.y, 0],
@@ -64,7 +64,7 @@ extension simd_float4x4 {
   public static func perspective(
     right: Float32, left: Float32, top: Float32, bottom: Float32, nearZ: Float32, farZ: Float32
   ) -> Self {
-    return simd_float4x4(rows: [
+    return Float4x4(rows: [
       [2 * nearZ / (right - left), 0, -(right + left) / (right - left), 0],
       [0, 2 * nearZ / (top - bottom), -(top + bottom) / (top - bottom), 0],
       [0, 0, farZ / (farZ - nearZ), -farZ * nearZ / (farZ - nearZ)],
