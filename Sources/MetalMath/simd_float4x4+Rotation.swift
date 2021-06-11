@@ -14,11 +14,12 @@ extension Float4x4 {
   /// - Returns: a rotation matrix
   @inlinable
   public static func rotateX(_ rotation: Float32) -> Self {
-    return Float4x4(
+    return Float4x4(rows: [
       [1, 0, 0, 0],
-      [0, cos(rotation), sin(rotation), 0],
-      [0, -sin(rotation), cos(rotation), 0],
-      [0, 0, 0, 1])
+      [0, cos(rotation), -sin(rotation), 0],
+      [0, sin(rotation), cos(rotation), 0],
+      [0, 0, 0, 1],
+    ])
   }
 
   /// Create a rotation matrix around Y axis
@@ -26,11 +27,12 @@ extension Float4x4 {
   /// - Returns: a rotation matrix
   @inlinable
   public static func rotateY(_ rotation: Float32) -> Self {
-    return Float4x4(
-      [cos(rotation), 0, -sin(rotation), 0],
+    return Float4x4(rows: [
+      [cos(rotation), 0, sin(rotation), 0],
       [0, 1, 0, 0],
-      [sin(rotation), 0, cos(rotation), 0],
-      [0, 0, 0, 1])
+      [-sin(rotation), 0, cos(rotation), 0],
+      [0, 0, 0, 1],
+    ])
   }
 
   /// Create a rotation matrix around Z axis
@@ -38,11 +40,12 @@ extension Float4x4 {
   /// - Returns: a rotation matrix
   @inlinable
   public static func rotateZ(_ rotation: Float32) -> Self {
-    return Float4x4(
-      [cos(rotation), sin(rotation), 0, 0],
-      [-sin(rotation), cos(rotation), 0, 0],
+    return Float4x4(rows: [
+      [cos(rotation), -sin(rotation), 0, 0],
+      [sin(rotation), cos(rotation), 0, 0],
       [0, 0, 1, 0],
-      [0, 0, 0, 1])
+      [0, 0, 0, 1],
+    ])
   }
 
   @inlinable

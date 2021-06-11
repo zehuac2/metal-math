@@ -12,7 +12,7 @@ import simd
 class Float4x4TranslationTests: XCTestCase {
   func testTranslate() {
     let position = SIMD4<Float32>([1, 1, 1, 1])
-    let translation = Float4x4.translate([-1, 1, 2])
+    let translation = simd_float4x4.translate([-1, 1, 2])
     let result = translation * position
 
     XCTAssertEqual(result, [0, 2, 3, 1])
@@ -20,7 +20,7 @@ class Float4x4TranslationTests: XCTestCase {
 
   func testTranslateX() {
     let position = SIMD4<Float32>([1, 1, 1, 1])
-    let translation = Float4x4.translateX(-1)
+    let translation = simd_float4x4.translateX(-1)
     let result = translation * position
 
     XCTAssertEqual(result, [0, 1, 1, 1])
@@ -28,7 +28,7 @@ class Float4x4TranslationTests: XCTestCase {
 
   func testTranslateY() {
     let position = SIMD4<Float32>([1, 1, 1, 1])
-    let translation = Float4x4.translateY(-1)
+    let translation = simd_float4x4.translateY(-1)
     let result = translation * position
 
     XCTAssertEqual(result, [1, 0, 1, 1])
@@ -36,7 +36,7 @@ class Float4x4TranslationTests: XCTestCase {
 
   func testTranslateZ() {
     let position = SIMD4<Float32>([1, 1, 1, 1])
-    let translation = Float4x4.translateZ(-1)
+    let translation = simd_float4x4.translateZ(-1)
     let result = translation * position
 
     XCTAssertEqual(result, [1, 1, 0, 1])
