@@ -7,14 +7,14 @@
 
 import simd
 
-extension Float4x4 {
+extension simd_float4x4 {
 
   /// Create a rotation matrix around X axis
   /// - Parameter rotation: rotation around x in radians
   /// - Returns: a rotation matrix
   @inlinable
   public static func rotateX(_ rotation: Float32) -> Self {
-    return Float4x4(rows: [
+    return simd_float4x4(rows: [
       [1, 0, 0, 0],
       [0, cos(rotation), -sin(rotation), 0],
       [0, sin(rotation), cos(rotation), 0],
@@ -27,7 +27,7 @@ extension Float4x4 {
   /// - Returns: a rotation matrix
   @inlinable
   public static func rotateY(_ rotation: Float32) -> Self {
-    return Float4x4(rows: [
+    return simd_float4x4(rows: [
       [cos(rotation), 0, sin(rotation), 0],
       [0, 1, 0, 0],
       [-sin(rotation), 0, cos(rotation), 0],
@@ -40,7 +40,7 @@ extension Float4x4 {
   /// - Returns: a rotation matrix
   @inlinable
   public static func rotateZ(_ rotation: Float32) -> Self {
-    return Float4x4(rows: [
+    return simd_float4x4(rows: [
       [cos(rotation), -sin(rotation), 0, 0],
       [sin(rotation), cos(rotation), 0, 0],
       [0, 0, 1, 0],

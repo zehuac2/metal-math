@@ -7,10 +7,10 @@
 
 import simd
 
-extension Float4x4 {
+extension simd_float4x4 {
   @inlinable
   public static func scale(_ axis: SIMD3<Float32>) -> Self {
-    return Float4x4(rows: [
+    return simd_float4x4(rows: [
       [axis.x, 0, 0, 0],
       [0, axis.y, 0, 0],
       [0, 0, axis.z, 0],
