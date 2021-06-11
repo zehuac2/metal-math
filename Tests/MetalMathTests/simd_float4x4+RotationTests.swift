@@ -20,4 +20,15 @@ class Float4x4RotationTests: XCTestCase {
 
     XCTAssertEqual([0, 0, 0, 1], point)
   }
+
+  func testRotateXAround() {
+    let rotation = simd_float4x4.rotateX(Float32(180).radian, around: [0, 0, 0.5])
+    var point = rotation * SIMD4<Float32>([0, 0, 0, 1])
+
+    XCTAssertEqual([0, 0, 1, 1], point)
+
+    point = rotation * point
+
+    XCTAssertEqual([0, 0, 0, 1], point)
+  }
 }
