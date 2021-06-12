@@ -15,10 +15,10 @@ extension simd_float4x4 {
   @inlinable
   public static func rotateX(_ rotation: Float32) -> Self {
     return simd_float4x4(
-      [1, 0, 0, 0],
-      [0, cos(rotation), sin(rotation), 0],
-      [0, -sin(rotation), cos(rotation), 0],
-      [0, 0, 0, 1])
+      SIMD4<Float32>(1, 0, 0, 0),
+      SIMD4<Float32>(0, cos(rotation), sin(rotation), 0),
+      SIMD4<Float32>(0, -sin(rotation), cos(rotation), 0),
+      SIMD4<Float32>(0, 0, 0, 1))
   }
 
   /// Create a rotation matrix around Y axis

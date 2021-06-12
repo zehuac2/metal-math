@@ -13,10 +13,10 @@ extension simd_float4x4 {
   @inlinable
   public static func translate(_ offset: SIMD3<Float32>) -> Self {
     return simd_float4x4(
-      [1, 0, 0, 0],
-      [0, 1, 0, 0],
-      [0, 0, 1, 0],
-      [offset.x, offset.y, offset.z, 1])
+      SIMD4<Float32>(1, 0, 0, 0),
+      SIMD4<Float32>(0, 1, 0, 0),
+      SIMD4<Float32>(0, 0, 1, 0),
+      SIMD4<Float32>(offset.x, offset.y, offset.z, 1))
   }
 
   /// Create a translation matrix along the X axis
@@ -25,10 +25,10 @@ extension simd_float4x4 {
   @inlinable
   public static func translateX(_ offset: Float32) -> Self {
     return simd_float4x4(
-      [1, 0, 0, 0],
-      [0, 1, 0, 0],
-      [0, 0, 1, 0],
-      [offset, 0, 0, 1])
+      SIMD4<Float32>(1, 0, 0, 0),
+      SIMD4<Float32>(0, 1, 0, 0),
+      SIMD4<Float32>(0, 0, 1, 0),
+      SIMD4<Float32>(offset, 0, 0, 1))
   }
 
   /// Create a translation matrix along the Y axis
@@ -37,10 +37,10 @@ extension simd_float4x4 {
   @inlinable
   public static func translateY(_ offset: Float32) -> Self {
     return simd_float4x4(
-      [1, 0, 0, 0],
-      [0, 1, 0, 0],
-      [0, 0, 1, 0],
-      [0, offset, 0, 1])
+      SIMD4<Float32>(1, 0, 0, 0),
+      SIMD4<Float32>(0, 1, 0, 0),
+      SIMD4<Float32>(0, 0, 1, 0),
+      SIMD4<Float32>(0, offset, 0, 1))
   }
 
   /// Create a translation matrix along the Z axis
@@ -49,9 +49,9 @@ extension simd_float4x4 {
   @inlinable
   public static func translateZ(_ offset: Float32) -> Self {
     return simd_float4x4(
-      [1, 0, 0, 0],
-      [0, 1, 0, 0],
-      [0, 0, 1, 0],
-      [0, 0, offset, 1])
+      SIMD4<Float32>(1, 0, 0, 0),
+      SIMD4<Float32>(0, 1, 0, 0),
+      SIMD4<Float32>(0, 0, 1, 0),
+      SIMD4<Float32>(0, 0, offset, 1))
   }
 }

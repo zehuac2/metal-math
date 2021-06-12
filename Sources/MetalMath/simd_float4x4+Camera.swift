@@ -17,10 +17,10 @@ extension simd_float4x4 {
     let yaxis = cross(zaxis, xaxis)
 
     return simd_float4x4(
-      [xaxis.x, yaxis.x, zaxis.x, 0],
-      [xaxis.y, yaxis.y, zaxis.y, 0],
-      [xaxis.z, yaxis.z, zaxis.z, 0],
-      [-dot(xaxis, eye), -dot(yaxis, eye), -dot(zaxis, eye), 1])
+      SIMD4<Float32>(xaxis.x, yaxis.x, zaxis.x, 0),
+      SIMD4<Float32>(xaxis.y, yaxis.y, zaxis.y, 0),
+      SIMD4<Float32>(xaxis.z, yaxis.z, zaxis.z, 0),
+      SIMD4<Float32>(-dot(xaxis, eye), -dot(yaxis, eye), -dot(zaxis, eye), 1))
   }
 
   /// Create a perspective projection matrix
@@ -63,12 +63,13 @@ extension simd_float4x4 {
     right: Float32, left: Float32, top: Float32, bottom: Float32, nearZ: Float32, farZ: Float32
   ) -> Self {
     return simd_float4x4(
-      [2 * nearZ / (right - left), 0, 0, 0],
-      [0, 2, 0, 0],
-      [
-        -(right + left) / (right - left), -(top + bottom) / (top - bottom), farZ / (farZ - nearZ),
-        1,
-      ],
-      [0, 0, -farZ * nearZ / (farZ - nearZ), 0])
+      SIMD4<Float32>(2 * nearZ / (right - left), 0, 0, 0),
+      SIMD4<Float32>(0, 2, 0, 0),
+      SIMD4<Float32>(
+        -(right + left) / (right - left),
+        -(top + bottom) / (top - bottom),
+        farZ / (farZ - nearZ),
+        1),
+      SIMD4<Float32>(0, 0, -farZ * nearZ / (farZ - nearZ), 0))
   }
 }
