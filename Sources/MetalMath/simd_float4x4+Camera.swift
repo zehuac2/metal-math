@@ -17,12 +17,10 @@ extension simd_float4x4 {
     let yaxis = cross(zaxis, xaxis)
 
     return simd_float4x4(
-      columns: (
-        [xaxis.x, yaxis.x, zaxis.x, 0],
-        [xaxis.y, yaxis.y, zaxis.y, 0],
-        [xaxis.z, yaxis.z, zaxis.z, 0],
-        [-dot(xaxis, eye), -dot(yaxis, eye), -dot(zaxis, eye), 1]
-      ))
+      [xaxis.x, yaxis.x, zaxis.x, 0],
+      [xaxis.y, yaxis.y, zaxis.y, 0],
+      [xaxis.z, yaxis.z, zaxis.z, 0],
+      [-dot(xaxis, eye), -dot(yaxis, eye), -dot(zaxis, eye), 1])
   }
 
   /// Create a perspective projection matrix
@@ -64,11 +62,13 @@ extension simd_float4x4 {
   public static func perspective(
     right: Float32, left: Float32, top: Float32, bottom: Float32, nearZ: Float32, farZ: Float32
   ) -> Self {
-    return simd_float4x4(rows: [
-      [2 * nearZ / (right - left), 0, -(right + left) / (right - left), 0],
-      [0, 2 * nearZ / (top - bottom), -(top + bottom) / (top - bottom), 0],
-      [0, 0, farZ / (farZ - nearZ), -farZ * nearZ / (farZ - nearZ)],
-      [0, 0, 1, 0],
-    ])
+    return simd_float4x4(
+      [2 * nearZ / (right - left), 0, 0, 0],
+      [0, 2, 0, 0],
+      [
+        -(right + left) / (right - left), -(top + bottom) / (top - bottom), farZ / (farZ - nearZ),
+        1,
+      ],
+      [0, 0, -farZ * nearZ / (farZ - nearZ), 0])
   }
 }
