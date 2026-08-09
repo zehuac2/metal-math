@@ -6,8 +6,8 @@
 //
 
 import MetalMath
-import simd
 import Testing
+import simd
 
 struct Float4x4RotationTests {
   @Test func rotateYAround() {

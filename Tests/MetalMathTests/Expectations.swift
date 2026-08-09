@@ -5,8 +5,8 @@
 //  Created by Zehua Chen on 5/21/21.
 //
 
-import simd
 import Testing
+import simd
 
 func expectEqual(
   _ expression1: Double,
