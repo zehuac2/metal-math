@@ -11,7 +11,7 @@ import simd
 
 struct Float4x4TranslationTests {
   @Test func translate() {
-    let position = SIMD4<Float32>([1, 1, 1, 1])
+    let position = SIMD4<Float>([1, 1, 1, 1])
     let translation = simd_float4x4.translate([-1, 1, 2])
     let result = translation * position
 
@@ -19,7 +19,7 @@ struct Float4x4TranslationTests {
   }
 
   @Test func translateX() {
-    let position = SIMD4<Float32>([1, 1, 1, 1])
+    let position = SIMD4<Float>([1, 1, 1, 1])
     let translation = simd_float4x4.translateX(-1)
     let result = translation * position
 
@@ -27,7 +27,7 @@ struct Float4x4TranslationTests {
   }
 
   @Test func translateY() {
-    let position = SIMD4<Float32>([1, 1, 1, 1])
+    let position = SIMD4<Float>([1, 1, 1, 1])
     let translation = simd_float4x4.translateY(-1)
     let result = translation * position
 
@@ -35,7 +35,7 @@ struct Float4x4TranslationTests {
   }
 
   @Test func translateZ() {
-    let position = SIMD4<Float32>([1, 1, 1, 1])
+    let position = SIMD4<Float>([1, 1, 1, 1])
     let translation = simd_float4x4.translateZ(-1)
     let result = translation * position
 

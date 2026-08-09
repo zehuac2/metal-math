@@ -11,7 +11,7 @@ import simd
 
 struct Float4x4ScalingTests {
   @Test func scale() {
-    let position = SIMD4<Float32>([1, 1, 1, 1])
+    let position = SIMD4<Float>([1, 1, 1, 1])
     let scaling = simd_float4x4.scale([2, 3, 4])
     let result = scaling * position
 

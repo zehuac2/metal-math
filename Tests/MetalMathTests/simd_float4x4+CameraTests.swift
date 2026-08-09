@@ -11,7 +11,7 @@ import simd
 
 struct Float4x4CameraTests {
   @Test func viewFromBehind() {
-    let position = SIMD4<Float32>([0, 0, 0, 1])
+    let position = SIMD4<Float>([0, 0, 0, 1])
     let lookat = simd_float4x4.look(at: [0, 0, 0], from: [0, 0, -1], up: [0, 1, 0])
     let result = lookat * position
 
@@ -19,7 +19,7 @@ struct Float4x4CameraTests {
   }
 
   @Test func viewFromFront() {
-    let position = SIMD4<Float32>([0, 0, 0, 1])
+    let position = SIMD4<Float>([0, 0, 0, 1])
     let lookat = simd_float4x4.look(at: [0, 0, 0], from: [0, 0, 1], up: [0, 1, 0])
     let result = lookat * position
 
@@ -27,7 +27,7 @@ struct Float4x4CameraTests {
   }
 
   @Test func viewFromRight() {
-    let position = SIMD4<Float32>([0, 0, 0, 1])
+    let position = SIMD4<Float>([0, 0, 0, 1])
     let lookat = simd_float4x4.look(at: [0, 0, 0], from: [1, 0, 0], up: [0, 1, 0])
     let result = lookat * position
 

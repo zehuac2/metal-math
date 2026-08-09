@@ -1,24 +1,24 @@
 //
-//  Float32+Degree.swift
+//  FloatingPoint+Degree.swift
 //  MetalMath
 //
 //  Created by Zehua Chen on 12/31/20.
 //
 
 extension FloatingPoint {
-  /// Convert the number from degree to radian
+  /// The value converted from degrees to radians.
   ///
   /// `self * .pi / 180`
   @inlinable
-  public var radian: Self {
+  public var radians: Self {
     return self * .pi / 180
   }
 
-  /// Convert the number from radian to degree
+  /// The value converted from radians to degrees.
   ///
   /// `self * 180 / .pi`
   @inlinable
-  public var degree: Self {
+  public var degrees: Self {
     return self * 180 / .pi
   }
 }

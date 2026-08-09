@@ -22,9 +22,9 @@ func expectEqual(
 }
 
 func expectEqual(
-  _ expression1: SIMD3<Float32>,
-  _ expression2: SIMD3<Float32>,
-  accuracy: Float32 = 0.001,
+  _ expression1: SIMD3<Float>,
+  _ expression2: SIMD3<Float>,
+  accuracy: Float = 0.001,
   sourceLocation: SourceLocation = #_sourceLocation
 ) {
   for index in expression1.indices {
@@ -38,9 +38,9 @@ func expectEqual(
 }
 
 func expectEqual(
-  _ expression1: SIMD4<Float32>,
-  _ expression2: SIMD4<Float32>,
-  accuracy: Float32 = 0.001,
+  _ expression1: SIMD4<Float>,
+  _ expression2: SIMD4<Float>,
+  accuracy: Float = 0.001,
   sourceLocation: SourceLocation = #_sourceLocation
 ) {
   for index in expression1.indices {

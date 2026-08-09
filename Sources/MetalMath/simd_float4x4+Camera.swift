@@ -1,5 +1,5 @@
 //
-//  simd_float4x4+LookAt.swift
+//  simd_float4x4+Camera.swift
 //  MetalMath
 //
 //  Created by Zehua Chen on 12/31/20.
@@ -8,8 +8,14 @@
 import simd
 
 extension simd_float4x4 {
+  /// Create a look-at view matrix.
+  /// - Parameters:
+  ///   - target: The point to look at.
+  ///   - eye: The position of the eye/camera.
+  ///   - up: The up direction.
+  /// - Returns: A view matrix.
   @inlinable
-  public static func look(at target: SIMD3<Float32>, from eye: SIMD3<Float32>, up: SIMD3<Float32>)
+  public static func look(at target: SIMD3<Float>, from eye: SIMD3<Float>, up: SIMD3<Float>)
     -> Self
   {
     let zaxis = normalize(target - eye)
@@ -17,23 +23,21 @@ extension simd_float4x4 {
     let yaxis = cross(zaxis, xaxis)
 
     return simd_float4x4(
-      SIMD4<Float32>(xaxis.x, yaxis.x, zaxis.x, 0),
-      SIMD4<Float32>(xaxis.y, yaxis.y, zaxis.y, 0),
-      SIMD4<Float32>(xaxis.z, yaxis.z, zaxis.z, 0),
-      SIMD4<Float32>(-dot(xaxis, eye), -dot(yaxis, eye), -dot(zaxis, eye), 1))
+      [xaxis.x, yaxis.x, zaxis.x, 0],
+      [xaxis.y, yaxis.y, zaxis.y, 0],
+      [xaxis.z, yaxis.z, zaxis.z, 0],
+      [-dot(xaxis, eye), -dot(yaxis, eye), -dot(zaxis, eye), 1])
   }
 
-  /// Create a perspective projection matrix
+  /// Create a perspective projection matrix.
   /// - Parameters:
-  ///   - fovY: vertical field of view in radians
-  ///   - aspect: aspect ratio between the X and Y axis, i.e. `width / height`
-  ///   - nearZ: near Z plane
-  ///   - farZ: far Z plane
-  /// - Returns: a projection matrix
+  ///   - fovY: Vertical field of view in radians.
+  ///   - aspect: Aspect ratio between the X and Y axis, i.e. `width / height`.
+  ///   - nearZ: Near Z plane.
+  ///   - farZ: Far Z plane.
+  /// - Returns: A projection matrix.
   @inlinable
-  public static func perspective(fovY: Float32, aspect: Float32, nearZ: Float32, farZ: Float32)
-    -> Self
-  {
+  public static func perspective(fovY: Float, aspect: Float, nearZ: Float, farZ: Float) -> Self {
     let height = tan(fovY * 0.5)
     let yScale = 1 / height
 
@@ -49,27 +53,28 @@ extension simd_float4x4 {
       farZ: farZ)
   }
 
-  /// Create a perspective projection matrix
+  /// Create a perspective projection matrix.
   /// - Parameters:
-  ///   - right: maximum x-value of the view volume
-  ///   - left: minimum x-value of the view volume
-  ///   - top: maximum y-value of the view volume
-  ///   - bottom: minimum y-value of the view volume
-  ///   - nearZ: minimum z-value of the view volume
-  ///   - farZ: maximum z-value of the view volume
-  /// - Returns: a projection matrix
+  ///   - right: Maximum x-value of the view volume.
+  ///   - left: Minimum x-value of the view volume.
+  ///   - top: Maximum y-value of the view volume.
+  ///   - bottom: Minimum y-value of the view volume.
+  ///   - nearZ: Minimum z-value of the view volume.
+  ///   - farZ: Maximum z-value of the view volume.
+  /// - Returns: A projection matrix.
   @inlinable
   public static func perspective(
-    right: Float32, left: Float32, top: Float32, bottom: Float32, nearZ: Float32, farZ: Float32
+    right: Float, left: Float, top: Float, bottom: Float, nearZ: Float, farZ: Float
   ) -> Self {
     return simd_float4x4(
-      SIMD4<Float32>(2 * nearZ / (right - left), 0, 0, 0),
-      SIMD4<Float32>(0, 2, 0, 0),
-      SIMD4<Float32>(
+      [2 * nearZ / (right - left), 0, 0, 0],
+      [0, 2, 0, 0],
+      [
         -(right + left) / (right - left),
         -(top + bottom) / (top - bottom),
         farZ / (farZ - nearZ),
-        1),
-      SIMD4<Float32>(0, 0, -farZ * nearZ / (farZ - nearZ), 0))
+        1,
+      ],
+      [0, 0, -farZ * nearZ / (farZ - nearZ), 0])
   }
 }
