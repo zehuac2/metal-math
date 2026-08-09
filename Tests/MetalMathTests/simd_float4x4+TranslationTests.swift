@@ -1,44 +1,44 @@
 //
-//  File.swift
-//
+//  simd_float4x4+TranslationTests.swift
+//  MetalMath
 //
 //  Created by Zehua Chen on 5/21/21.
 //
 
 import MetalMath
-import XCTest
 import simd
+import Testing
 
-class Float4x4TranslationTests: XCTestCase {
-  func testTranslate() {
+struct Float4x4TranslationTests {
+  @Test func translate() {
     let position = SIMD4<Float32>([1, 1, 1, 1])
     let translation = simd_float4x4.translate([-1, 1, 2])
     let result = translation * position
 
-    XCTAssertEqual(result, [0, 2, 3, 1])
+    expectEqual(result, [0, 2, 3, 1])
   }
 
-  func testTranslateX() {
+  @Test func translateX() {
     let position = SIMD4<Float32>([1, 1, 1, 1])
     let translation = simd_float4x4.translateX(-1)
     let result = translation * position
 
-    XCTAssertEqual(result, [0, 1, 1, 1])
+    expectEqual(result, [0, 1, 1, 1])
   }
 
-  func testTranslateY() {
+  @Test func translateY() {
     let position = SIMD4<Float32>([1, 1, 1, 1])
     let translation = simd_float4x4.translateY(-1)
     let result = translation * position
 
-    XCTAssertEqual(result, [1, 0, 1, 1])
+    expectEqual(result, [1, 0, 1, 1])
   }
 
-  func testTranslateZ() {
+  @Test func translateZ() {
     let position = SIMD4<Float32>([1, 1, 1, 1])
     let translation = simd_float4x4.translateZ(-1)
     let result = translation * position
 
-    XCTAssertEqual(result, [1, 1, 0, 1])
+    expectEqual(result, [1, 1, 0, 1])
   }
 }
